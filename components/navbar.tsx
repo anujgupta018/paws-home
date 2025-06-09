@@ -20,13 +20,13 @@ export const Navbar = () => {
 
         <nav className="hidden md:flex items-center gap-6">
           <Link
-            href="/"
+            href="/pets"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
             Find pets
           </Link>
           <Link
-            href="/"
+            href="/about"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
             About Us
@@ -82,14 +82,14 @@ export const Navbar = () => {
         >
           <nav className="flex flex-col gap-2 pb-4">
             <Link
-              href="/"
+              href="/pets"
               className="text-sm font-medium transition-colors hover:text-primary"
               onClick={() => setMenuOpen(false)}
             >
               Find pets
             </Link>
             <Link
-              href="/"
+              href="/about"
               className="text-sm font-medium transition-colors hover:text-primary"
               onClick={() => setMenuOpen(false)}
             >

@@ -322,6 +322,26 @@ export default function Home() {
                 </div>
               </div>
       </section>
+
+      <section className="py-16 md:py-24 bg-muted">
+              <div className="container px-4 md:px-6 text-center">
+                <h2 className="tracking-tighter text-3xl md:text-4xl font-bold mb-4">Ready to Find Your Perfect Pet?</h2>
+                  <p className="text-xl text-muted-foreground mb-8 max-w-[85%] md:max-w-[65%] mx-auto">
+                    Join Thousands of happy families who have found their perfect companions through PawsHome.
+                    Start your adoption journey today!
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Button size="lg" asChild>
+                      <Link href="/pets">Start Adopting Now!
+                      <PawPrint className="h-4 w-4 ml-2 text-yellow-700" />
+                      </Link>
+                    </Button>
+                    <Button size="lg" variant="outline" asChild>
+                      <Link href="/about">Learn More About Us</Link>
+                    </Button>
+                  </div>
+              </div>
+      </section>
     </div>
   );
 }
