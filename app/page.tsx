@@ -282,6 +282,46 @@ export default function Home() {
             </div>
           </div>
       </section>
+
+      {/* statistics section */}
+      <section className="py16 md:py-24 bg-primary text-primary-foreground">
+              <div className="container px-4 md:px-6">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                  {
+                    [
+                      {
+                        icon: Heart,
+                        count: "2845",
+                        label: "Pets Adopted",
+                      },
+                      {
+                        icon: Users,
+                        count: "1234",
+                        label: "Happy Families",
+                      },
+                      {
+                        icon: PawPrint,
+                        count: "500+",
+                        label: "Pets Rescued",
+                      },
+                      {
+                        icon: Star,
+                        count: "4.9/5",
+                        label: "Customer Rating",
+                      },
+                    ].map((stat, index) => (
+                      <div key={index} className="space-y-2">
+                        <div className="text-3xl font-bold flex items-center justify-center">
+                          <stat.icon className="h-8 w-8 mr-2 text-yellow-400" />
+                          {stat.count}
+                        </div>
+                        <p className="text-sm">{stat.label}</p>
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+      </section>
     </div>
   );
 }
