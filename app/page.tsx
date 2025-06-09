@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Award, Heart, PawPrint, Search, Users } from "lucide-react";
+import { Award, Heart, PawPrint, Search, Star, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -217,6 +217,70 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Success section */}
+      <section className="py-16 md:py-24">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center justify-center text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tighter mb-4">Happy Tails</h2>
+              <p className="text-xl text-muted-foreground max-w-[85%] md:max-w-[65%]
+              ">Read Heartwarming stories from families who found their perfect companion through PawsHome.</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                name: "Sarah & Max",
+                story:
+                  "Max has brought so much joy to our family. He's the perfect running companion and loves our kids!",
+                image: "/placeholder.svg?height=300&width=300",
+                rating: 5,
+                location: "Seattle, WA",
+              },
+              {
+                name: "John & Bella",
+                story:
+                  "Bella is the sweetest cat ever. She's helped me through tough times and is always there for cuddles.",
+                image: "/placeholder.svg?height=300&width=300",
+                rating: 5,
+                location: "Austin, TX",
+              },
+              {
+                name: "The Johnson Family",
+                story: "Rocky has been the perfect addition to our family. The kids love him and he's so well-behaved!",
+                image: "/placeholder.svg?height=300&width=300",
+                rating: 4,
+                location: "Denver, CO",
+              }
+              ].map((story,index)=>(
+                <Card key={index} className="text-center">
+                  <CardHeader>
+                    <Image
+                      src=""
+                      alt=""
+                      width={100}
+                      height={100}
+                      className="rounded-full mx-auto mb-4 object-cover"
+                    />
+                    <div className="flex justify-center mb-2">
+                    {[...Array(story.rating)].map((_,i)=>(
+                      <Star key={i} className="h-5 w-5 text-yellow-500 fill-current"/>
+                    ))}
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="italic mb-4">
+                      {story.story}
+                    </p>
+                    <div>
+                      <p className="font-semibold">{story.name}</p>
+                      <p className="text-muted-foreground">{story.location}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
       </section>
     </div>
   );
