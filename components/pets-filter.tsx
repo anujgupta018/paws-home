@@ -15,8 +15,9 @@ export default function PetsFilter() {
   const currentTraits = searchParams.get("traits") || "all";
 
   const [type, setType] = useState(currentType);
-  const [age,setAge]=useState(currentAge);
-  const [gender,setGender]=useState(currentGender);
+  const [age, setAge] = useState(currentAge);
+  const [size, setSize] = useState(curentSize);
+  const [gender, setGender] = useState(currentGender);
   return (
     <div className="space-y-6">
       <Card>
@@ -40,7 +41,7 @@ export default function PetsFilter() {
                 <Label htmlFor="type-cat">Cats</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="other" id="type-other"/>
+                <RadioGroupItem value="other" id="type-other" />
                 <Label htmlFor="type-other">Others</Label>
               </div>
             </RadioGroup>
@@ -49,40 +50,73 @@ export default function PetsFilter() {
           <div className="space-y-2">
             <h3 className="font-medium">Age</h3>
             <RadioGroup value={age} onValueChange={setAge}>
-                <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="all" id="age-all"/>
-                    <Label htmlFor="age-all">All</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="baby" id="age-baby"/>
-                    <Label htmlFor="age-baby">Baby</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="young" id="age-young"/>
-                    <Label htmlFor="age-young">Young</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="adult" id="age-adult"/>
-                    <Label htmlFor="age-adult">Adult</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="senior" id="senior"/>
-                    <Label htmlFor="age-senior">Senior</Label>
-                </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="all" id="age-all" />
+                <Label htmlFor="age-all">All</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="baby" id="age-baby" />
+                <Label htmlFor="age-baby">Baby</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="young" id="age-young" />
+                <Label htmlFor="age-young">Young</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="adult" id="age-adult" />
+                <Label htmlFor="age-adult">Adult</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="senior" id="senior" />
+                <Label htmlFor="age-senior">Senior</Label>
+              </div>
+            </RadioGroup>
+          </div>
+          <div className="space-y-2 ">
+            <h3 className="font-medium">Size</h3>
+            <RadioGroup value={size} onValueChange={setSize}>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="all" id="size-all" />
+                <Label htmlFor="size-all">Any Size</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="small" id="size-small" />
+                <Label htmlFor="size-small">Small</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="medium" id="size-medium" />
+                <Label htmlFor="size-medium">Medium</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="large" id="size-large" />
+                <Label htmlFor="size-large">Large</Label>
+              </div>
             </RadioGroup>
           </div>
 
           <div className="space-y-2">
             <h3 className="font-medium">Gender</h3>
             <RadioGroup value="gender" onValueChange={setGender}>
-                <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="all" id="gender-all"/>
-                    <Label htmlFor="gender-all">Any Gender</Label>
-                </div>
-                
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="all" id="gender-all" />
+                <Label htmlFor="gender-all">Any Gender</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="male" id="gender-male" />
+                <Label htmlFor="gender-male">Male</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="female" id="gender-female" />
+                <Label htmlFor="gender-female">Female</Label>
+              </div>
             </RadioGroup>
           </div>
         </CardContent>
+
+        <div className="space-y-2"> 
+          <h3 className="font-medium">Traits</h3>
+          
+        </div>
       </Card>
     </div>
   );
