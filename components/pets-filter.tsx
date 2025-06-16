@@ -2,22 +2,62 @@
 
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Label } from "./ui/label";
+import { Checkbox } from "./ui/checkbox";
+import { Button } from "./ui/button";
+import { Slider } from "./ui/slider";
+;
 
 export default function PetsFilter() {
+  const router = useRouter();
   const searchParams = useSearchParams();
+
   const currentType = searchParams.get("type") || "all";
   const currentAge = searchParams.get("age") || "all";
   const curentSize = searchParams.get("size") || "size";
   const currentGender = searchParams.get("gender") || "all";
-  const currentTraits = searchParams.get("traits") || "all";
+  const currentTraits = searchParams.getAll("traits") || [];
 
   const [type, setType] = useState(currentType);
   const [age, setAge] = useState(currentAge);
   const [size, setSize] = useState(curentSize);
   const [gender, setGender] = useState(currentGender);
+  const [traits, setTraits] = useState<string[]>(currentTraits);
+  const [distance, setDistance] = useState([50]);
+
+  const toggleTraits = (trait: string) => {
+    setTraits((prev) =>
+      prev.includes(trait) ? prev.filter((t) => t !== trait) : [...prev, trait]
+    );
+  };
+
+  // apply filters
+  const applyFilters = () => {
+    const params = new URLSearchParams();
+    if (type !== "all") params.set("type", type);
+    if (age !== "all") params.set("age", age);
+    if (size !== "all") params.set("size", size);
+    if (gender !== "all") params.set("gender", gender);
+
+    params.delete("traits");
+    traits.forEach((trait) => {
+      params.append("traits", trait);
+    });
+    router.push(`/pets?${params.toString()}`);
+  };
+  //reset filters
+  const resetFilters = () => {
+    setType("all");
+    setAge("all");
+    setGender("all");
+    setSize("all");
+    setTraits([]);
+    setDistance([50]);
+    router.push("/pets");
+  };
+
   return (
     <div className="space-y-6">
       <Card>
@@ -96,7 +136,7 @@ export default function PetsFilter() {
 
           <div className="space-y-2">
             <h3 className="font-medium">Gender</h3>
-            <RadioGroup value="gender" onValueChange={setGender}>
+            <RadioGroup value={gender} onValueChange={setGender}>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="all" id="gender-all" />
                 <Label htmlFor="gender-all">Any Gender</Label>
@@ -111,12 +151,61 @@ export default function PetsFilter() {
               </div>
             </RadioGroup>
           </div>
-        </CardContent>
 
-        <div className="space-y-2"> 
-          <h3 className="font-medium">Traits</h3>
-          
-        </div>
+          <div className="space-y-2">
+            <h3 className="font-medium">Traits</h3>
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                "Good with Kids",
+                "Good with Dogs",
+                "Good with Cats",
+                "House Trained",
+                "Special needs",
+                "Vaccinated",
+              ].map((trait) => (
+                <div key={trait} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={`trait-${trait.toLowerCase().replace(/\s+/g, "-")}`}
+                    checked={traits.includes(trait)}
+                    onCheckedChange={() => toggleTraits(trait)}
+                  />
+                  <Label
+                    htmlFor={`trait-${trait
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}`}
+                  >
+                    {trait}
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <h3 className="font-medium">Distance</h3>
+              <Slider
+                defaultValue={[50]}
+                max={100}
+                step={5}
+                value={distance}
+                onValueChange={setDistance}
+              />
+            </div>
+            <div className="flex justify-between text-sm">
+              <span>0 miles</span>
+              <span>{distance[0]} miles</span>
+              <span>100 miles</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Button onClick={applyFilters}>Apply Filters</Button>
+            <Button variant="outline" onClick={resetFilters}>
+              Reset Filters
+            </Button>
+          </div>
+        </CardContent>
       </Card>
     </div>
   );
