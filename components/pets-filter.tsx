@@ -8,21 +8,19 @@ import { Label } from "./ui/label";
 import { Checkbox } from "./ui/checkbox";
 import { Button } from "./ui/button";
 import { Slider } from "./ui/slider";
-;
-
 export default function PetsFilter() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const currentType = searchParams.get("type") || "all";
   const currentAge = searchParams.get("age") || "all";
-  const curentSize = searchParams.get("size") || "size";
+  const currentSize = searchParams.get("size") || "all";
   const currentGender = searchParams.get("gender") || "all";
   const currentTraits = searchParams.getAll("traits") || [];
 
   const [type, setType] = useState(currentType);
   const [age, setAge] = useState(currentAge);
-  const [size, setSize] = useState(curentSize);
+  const [size, setSize] = useState(currentSize);
   const [gender, setGender] = useState(currentGender);
   const [traits, setTraits] = useState<string[]>(currentTraits);
   const [distance, setDistance] = useState([50]);
@@ -73,11 +71,11 @@ export default function PetsFilter() {
                 <Label htmlFor="type-all">All Pets</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="dogs" id="type-dog" />
+                <RadioGroupItem value="Dog" id="type-dog" />
                 <Label htmlFor="type-dog">Dogs</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="cats" id="type-cat" />
+                <RadioGroupItem value="Cat" id="type-cat" />
                 <Label htmlFor="type-cat">Cats</Label>
               </div>
               <div className="flex items-center space-x-2">

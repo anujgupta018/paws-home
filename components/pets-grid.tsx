@@ -15,64 +15,49 @@ import { Badge } from "./ui/badge";
 import { useState } from "react";
 import { Heart, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useSearchParams } from "next/navigation";
 
-export default function PetsGrid({
-  searchParams,
-}: {
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-}) {
+export default function PetsGrid() {
   const [favorites, setFavorites] = useState<string[]>([]);
   const toggleFavorite = (id: string) => {
     setFavorites((prev) =>
       prev.includes(id) ? prev.filter((petId) => petId !== id) : [...prev, id]
     );
   };
+  const searchParams = useSearchParams();
+  const type = searchParams.get("type") || "all";
+  const age = searchParams.get("age") || "all";
+  const size = searchParams.get("size") || "all";
+  const gender = searchParams.get("gender") || "all";
+  const traits = searchParams.getAll("traits");
+
   const filteredPets = pets.filter((pet) => {
-    //type
+    if (type !== "all" && pet.type.toLowerCase() !== type.toLowerCase()) {
+      return false;
+    }
+    if (age !== "all" && pet.ageCategory.toLowerCase() !== age.toLowerCase()) {
+      return false;
+    }
+    if (size !== "all" && pet.size.toLowerCase() !== size.toLowerCase()) {
+      return false;
+    }
+    if (gender !== "all" && pet.gender.toLowerCase() !== gender.toLowerCase()) {
+      return false;
+    }
     if (
-      searchParams.type &&
-      searchParams.type !== "all" &&
-      pet.type.toLowerCase() !== searchParams.type
+      traits.length > 0 &&
+      !traits.every((t) =>
+        pet.traits.some(
+          (petTrait) => petTrait.toLowerCase() === t.toLowerCase()
+        )
+      )
     ) {
       return false;
     }
-    //age
-    if (
-      searchParams.age &&
-      searchParams.age !== "all" &&
-      pet.age.toLowerCase() !== searchParams.age
-    ) {
-      return false;
-    }
-    //size
-    if (
-      searchParams.size &&
-      searchParams.size !== "all" &&
-      pet.size.toLowerCase() !== searchParams.size
-    ) {
-      return false;
-    }
-    //gender
-    if (
-      searchParams.gender &&
-      searchParams.gender !== "all" &&
-      pet.gender.toLowerCase() !== searchParams.gender
-    ) {
-      return false;
-    }
-    //traits
-    if (searchParams.traits) {
-      const requiredTraits = Array.isArray(searchParams.traits)
-        ? searchParams.traits
-        : [searchParams.traits];
-      if (!requiredTraits.every((trait) => pet.traits.includes(trait))) {
-        return false;
-      }
-    }
+
     return true;
   });
+
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
@@ -106,7 +91,7 @@ export default function PetsGrid({
             <Card key={pet.id} className="overflow-hidden group">
               <div className="relative">
                 <Image
-                  src=""
+                  src={pet.image}
                   alt={pet.name}
                   width={400}
                   height={300}

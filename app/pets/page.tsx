@@ -3,13 +3,7 @@ import PetsGrid from "@/components/pets-grid";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
 
-export default function PetsPage({
-  searchParams,
-}: {
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-}) {
+export default function PetsPage() {
   return (
     <div className="container py-10">
       <div className="flex flex-col gap-6">
@@ -23,11 +17,11 @@ export default function PetsPage({
 
         <div className="grid gap-6 md:grid-cols-[240px_1fr]">
           <aside>
-            <PetsFilter/>
+            <PetsFilter />
           </aside>
           <main>
             <Suspense fallback={<PetGridSkeleton />}>
-              <PetsGrid searchParams={searchParams} />
+              <PetsGrid />
             </Suspense>
           </main>
         </div>
