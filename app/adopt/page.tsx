@@ -1,6 +1,8 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -13,6 +15,8 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { pets } from "@/lib/mock-data";
+import { Calendar, MapPin, Ruler } from "lucide-react";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 
@@ -256,7 +260,76 @@ export default function AdoptPage() {
                   </div>
                 </CardContent>
               </Card>
+
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id="terms"
+                        checked={formData.agreeToTerms}
+                        onCheckedChange={(change) =>
+                          handleInputChange("agreeToTerms", change as boolean)
+                        }
+                      />
+                      <Label className="text-sm" htmlFor="terms">
+                        I agree to the terms and conditions and understand this
+                        application does not gurantee adoption.
+                      </Label>
+                    </div>
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full"
+                      disabled={!formData.agreeToTerms || isSubmitting}
+                    >
+                      {isSubmitting ? "Submitting...." : "Submit Application"}
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
             </form>
+          </div>
+
+          <div className="space-y-6">
+            {pet && (
+              <Card>
+                <CardHeader>
+                  <CardTitle>Adopting {pet.name}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <Image
+                      src={pet.image}
+                      alt={pet.name}
+                      width={300}
+                      height={200}
+                      className="w-full h-32 object-cover rounded-lg"
+                    />
+                    <div>
+                      <p className="font-medium">{pet.breed}</p>
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground mt-2">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-4 w-4" />
+                          {pet.age}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Ruler className="h-4 w-4" />
+                          {pet.size}
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1 text-sm text-muted-foreground mt-1">
+                        <MapPin className="h-4 w-4" />
+                        {pet.location}
+                      </div>
+                    </div>
+                    <div className="text-lg font-semibold text-primary">
+                      Adoption Fee: {pet.adoptionFee}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
       </div>
