@@ -3,9 +3,18 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { pets } from "@/lib/mock-data";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function AdoptPage() {
   const searchParams = useSearchParams();
@@ -40,6 +49,15 @@ export default function AdoptPage() {
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+  };
   return (
     <div className="container py-10">
       <div className="max-w-4xl mx-auto">
@@ -52,7 +70,7 @@ export default function AdoptPage() {
 
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <form className="space-y-8">
+            <form className="space-y-8" onSubmit={handleSubmit}>
               <Card>
                 <CardHeader>
                   <CardTitle>Personal Information</CardTitle>
@@ -155,6 +173,86 @@ export default function AdoptPage() {
                         }
                       />
                     </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Housing Information</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex flex-col gap-4">
+                    <Label>Type of Housing</Label>
+                    <Select
+                      value={formData.housingType}
+                      onValueChange={(value) =>
+                        handleInputChange("housingType", value)
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select housing Type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="house">House</SelectItem>
+                        <SelectItem value="apartment">Apartment</SelectItem>
+                        <SelectItem value="condo">Condo</SelectItem>
+                        <SelectItem value="townhouse">Townhouse</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label className="mb-2">Do you own or rent?</Label>
+                    <RadioGroup
+                      value={formData.ownRent}
+                      onValueChange={(val) => handleInputChange("ownRent", val)}
+                    >
+                      <div className="flex items-center space-x-2 ">
+                        <RadioGroupItem value="own" id="own" />
+                        <Label htmlFor="own">Own</Label>
+                      </div>
+                      <div className="flex items-center space-x-2 ">
+                        <RadioGroupItem value="rent" id="rent" />
+                        <Label htmlFor="rent">Rent</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Pet Experience</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex flex-col gap-4">
+                    <Label htmlFor="petExperience">
+                      Describe your experience with pets
+                    </Label>
+                    <Textarea
+                      id="petExperience"
+                      required
+                      value={formData.petExperience}
+                      onChange={(e) =>
+                        handleInputChange("petExperience", e.target.value)
+                      }
+                      placeholder="Tell us your history with pets,training experience etc."
+                    />
+                  </div>
+                  <div className="flex flex-col gap-4">
+                    <Label htmlFor="reasonForAdoption">
+                      Why do you want to adopt a pet?
+                    </Label>
+                    <Textarea
+                      id="reasonForAdoption"
+                      required
+                      value={formData.reasonForAdoption}
+                      onChange={(e) =>
+                        handleInputChange("reasonForAdoption", e.target.value)
+                      }
+                      placeholder="Tell us about your motivation for adopting."
+                    />
                   </div>
                 </CardContent>
               </Card>
