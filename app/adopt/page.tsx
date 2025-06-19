@@ -330,6 +330,22 @@ export default function AdoptPage() {
                 </CardContent>
               </Card>
             )}
+
+            <Card>
+              <CardHeader>
+                <CardTitle>What happens next?</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ol className="list-decimal list-inside space-y-2 text-sm text-muted-foreground">
+                  <li>We review your application (2-3 business days)</li>
+                  <li>Phone interview with our adoption team</li>
+                  <li>Meet and greet with the pet</li>
+                  <li>Home visit (if required)</li>
+                  <li>Finalize adoption paperwork</li>
+                  <li>Welcome your new Family member home!</li>
+                </ol>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
