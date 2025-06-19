@@ -57,7 +57,7 @@ export const FeaturedPets = () => {
         <Card key={pet.id} className="overflow-hidden group">
           <div className="relative">
             <Image
-              src=""
+              src={pet.image}
               alt={pet.name}
               height={300}
               width={400}
