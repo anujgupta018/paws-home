@@ -256,7 +256,7 @@ export default function Home() {
                 <Card key={index} className="text-center">
                   <CardHeader>
                     <Image
-                      src=""
+                      src={story.image}
                       alt=""
                       width={100}
                       height={100}

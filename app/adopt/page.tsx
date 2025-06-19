@@ -1,7 +1,13 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -62,6 +68,43 @@ export default function AdoptPage() {
     setIsSubmitting(false);
     setIsSubmitted(true);
   };
+
+  if (isSubmitted) {
+    return (
+      <div className="container py-10">
+        <div className="max-w-2xl mx-auto text-center">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-2xl text-green-600">
+                Application Submitted
+              </CardTitle>
+              <CardDescription>
+                Thank you for your interest in adopting{" "}
+                {pet?.name || "One of our pets"} . We will review your
+                application and get back to you within 2-3 business days.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <p className="text-muted-foreground">
+                  In the meantime, feel free to browse more pets or learn about
+                  our adoption process.
+                </p>
+                <div className="flex gap-4 justify-center">
+                  <Button asChild>
+                    <a href="/pets">Browse More pets</a>
+                  </Button>
+                  <Button variant={"outline"} asChild>
+                    <a href="/">Back to home</a>
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="container py-10">
       <div className="max-w-4xl mx-auto">
