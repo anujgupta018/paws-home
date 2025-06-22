@@ -1,7 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
 import { Badge } from "./ui/badge";
 import { useState } from "react";
 import { Button } from "./ui/button";
@@ -13,32 +19,59 @@ const featuredPets = [
   {
     id: "1",
     name: "Luna",
-    type: "Golden Retriever",
+    breed: "Golden Retriever",
+    type: "Dog",
     age: "2 years",
+    ageCategory: "young",
+    gender: "Female",
+    size: "Large",
     location: "San Francisco, CA",
-    image: "/placeholder.svg?height=300&width=400",
+    image:
+      "https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=300&fit=crop&crop=face",
     traits: ["Friendly", "Trained", "Good with kids"],
     urgent: false,
+    description:
+      "Luna is a beautiful Golden Retriever with a heart of gold. She's great with children and other pets, and loves to play fetch in the park. Luna is fully house-trained and knows several commands. She's looking for an active family who can give her plenty of exercise and love.",
+    healthInfo: "Spayed, vaccinated, microchipped",
+    adoptionFee: "$250",
   },
   {
     id: "2",
     name: "Whiskers",
-    type: "Maine Coon Cat",
+    breed: "Maine Coon",
+    type: "Cat",
     age: "3 years",
+    ageCategory: "adult",
+    gender: "Male",
+    size: "Medium",
     location: "Los Angeles, CA",
-    image: "/placeholder.svg?height=300&width=400",
+    image:
+      "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=300&fit=crop&crop=face",
     traits: ["Calm", "Indoor", "Affectionate"],
     urgent: true,
+    description:
+      "Whiskers is a gorgeous Maine Coon with a luxurious coat and gentle personality. He enjoys lounging in sunny spots and being petted. Whiskers is litter-trained and would do best in a quiet home where he can be the center of attention.",
+    healthInfo: "Neutered, vaccinated, microchipped",
+    adoptionFee: "$150",
   },
   {
     id: "3",
     name: "Buddy",
-    type: "Labrador Mix",
+    breed: "Labrador Mix",
+    type: "Dog",
     age: "1 year",
+    ageCategory: "young",
+    gender: "Male",
+    size: "Large",
     location: "New York, NY",
-    image: "/placeholder.svg?height=300&width=400",
+    image:
+      "https://images.unsplash.com/photo-1551717743-49959800b1f6?w=400&h=300&fit=crop&crop=face",
     traits: ["Energetic", "Playful", "Loyal"],
     urgent: false,
+    description:
+      "Buddy is a playful Labrador mix who loves to run and play. He's still learning basic commands but is very eager to please. Buddy would thrive in an active household with a yard where he can burn off energy. He gets along well with other dogs but hasn't been tested with cats.",
+    healthInfo: "Neutered, vaccinated, microchipped",
+    adoptionFee: "$200",
   },
 ];
 
@@ -111,10 +144,19 @@ export const FeaturedPets = () => {
           </CardContent>
           <CardFooter className="flex gap-2">
             <Button className="flex-1" asChild>
-                <Link href={`/pet/${pet.id}`}>Meet {pet.name}</Link>
+              <Link href={`/pet/${pet.id}`}>Meet {pet.name}</Link>
             </Button>
-            <Button variant="outline" size="icon" onClick={()=>toggleFavorite(pet.id)}>
-                <Heart className={cn("h-4 w-4",favorites.includes(pet.id) && "fill-current text-red-500")}/>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => toggleFavorite(pet.id)}
+            >
+              <Heart
+                className={cn(
+                  "h-4 w-4",
+                  favorites.includes(pet.id) && "fill-current text-red-500"
+                )}
+              />
             </Button>
           </CardFooter>
         </Card>

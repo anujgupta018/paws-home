@@ -12,6 +12,7 @@ import {
 import { Award, Heart, PawPrint, Search, Star, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import frontImage from "@/public/frontimage.jpeg"; // Update with your actual image path
 
 export default function Home() {
   return (
@@ -84,8 +85,8 @@ export default function Home() {
             </div>
             <div className="relative">
               <Image
-                src=""
-                alt=""
+                src={frontImage}
+                alt="family with pets"
                 width={600}
                 height={600}
                 className="rounded-lg shadow-xl mx-auto"
@@ -221,15 +222,22 @@ export default function Home() {
 
       {/* Success section */}
       <section className="py-16 md:py-24">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tighter mb-4">Happy Tails</h2>
-              <p className="text-xl text-muted-foreground max-w-[85%] md:max-w-[65%]
-              ">Read Heartwarming stories from families who found their perfect companion through PawsHome.</p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center justify-center text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tighter mb-4">
+              Happy Tails
+            </h2>
+            <p
+              className="text-xl text-muted-foreground max-w-[85%] md:max-w-[65%]
+              "
+            >
+              Read Heartwarming stories from families who found their perfect
+              companion through PawsHome.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
                 name: "Sarah & Max",
                 story:
                   "Max has brought so much joy to our family. He's the perfect running companion and loves our kids!",
@@ -247,100 +255,103 @@ export default function Home() {
               },
               {
                 name: "The Johnson Family",
-                story: "Rocky has been the perfect addition to our family. The kids love him and he's so well-behaved!",
+                story:
+                  "Rocky has been the perfect addition to our family. The kids love him and he's so well-behaved!",
                 image: "/placeholder.svg?height=300&width=300",
                 rating: 4,
                 location: "Denver, CO",
-              }
-              ].map((story,index)=>(
-                <Card key={index} className="text-center">
-                  <CardHeader>
-                    <Image
-                      src={story.image}
-                      alt=""
-                      width={100}
-                      height={100}
-                      className="rounded-full mx-auto mb-4 object-cover"
-                    />
-                    <div className="flex justify-center mb-2">
-                    {[...Array(story.rating)].map((_,i)=>(
-                      <Star key={i} className="h-5 w-5 text-yellow-500 fill-current"/>
+              },
+            ].map((story, index) => (
+              <Card key={index} className="text-center">
+                <CardHeader>
+                  <Image
+                    src={story.image}
+                    alt=""
+                    width={100}
+                    height={100}
+                    className="rounded-full mx-auto mb-4 object-cover"
+                  />
+                  <div className="flex justify-center mb-2">
+                    {[...Array(story.rating)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="h-5 w-5 text-yellow-500 fill-current"
+                      />
                     ))}
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="italic mb-4">
-                      {story.story}
-                    </p>
-                    <div>
-                      <p className="font-semibold">{story.name}</p>
-                      <p className="text-muted-foreground">{story.location}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="italic mb-4">{story.story}</p>
+                  <div>
+                    <p className="font-semibold">{story.name}</p>
+                    <p className="text-muted-foreground">{story.location}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
+        </div>
       </section>
 
       {/* statistics section */}
       <section className="py16 md:py-24 bg-primary text-primary-foreground">
-              <div className="container px-4 md:px-6">
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-                  {
-                    [
-                      {
-                        icon: Heart,
-                        count: "2845",
-                        label: "Pets Adopted",
-                      },
-                      {
-                        icon: Users,
-                        count: "1234",
-                        label: "Happy Families",
-                      },
-                      {
-                        icon: PawPrint,
-                        count: "500+",
-                        label: "Pets Rescued",
-                      },
-                      {
-                        icon: Star,
-                        count: "4.9/5",
-                        label: "Customer Rating",
-                      },
-                    ].map((stat, index) => (
-                      <div key={index} className="space-y-2">
-                        <div className="text-3xl font-bold flex items-center justify-center">
-                          <stat.icon className="h-8 w-8 mr-2 text-yellow-400" />
-                          {stat.count}
-                        </div>
-                        <p className="text-sm">{stat.label}</p>
-                      </div>
-                    ))
-                  }
+        <div className="container px-4 md:px-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+            {[
+              {
+                icon: Heart,
+                count: "2845",
+                label: "Pets Adopted",
+              },
+              {
+                icon: Users,
+                count: "1234",
+                label: "Happy Families",
+              },
+              {
+                icon: PawPrint,
+                count: "500+",
+                label: "Pets Rescued",
+              },
+              {
+                icon: Star,
+                count: "4.9/5",
+                label: "Customer Rating",
+              },
+            ].map((stat, index) => (
+              <div key={index} className="space-y-2">
+                <div className="text-3xl font-bold flex items-center justify-center">
+                  <stat.icon className="h-8 w-8 mr-2 text-yellow-400" />
+                  {stat.count}
                 </div>
+                <p className="text-sm">{stat.label}</p>
               </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="py-16 md:py-24 bg-muted">
-              <div className="container px-4 md:px-6 text-center">
-                <h2 className="tracking-tighter text-3xl md:text-4xl font-bold mb-4">Ready to Find Your Perfect Pet?</h2>
-                  <p className="text-xl text-muted-foreground mb-8 max-w-[85%] md:max-w-[65%] mx-auto">
-                    Join Thousands of happy families who have found their perfect companions through PawsHome.
-                    Start your adoption journey today!
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button size="lg" asChild>
-                      <Link href="/pets">Start Adopting Now!
-                      <PawPrint className="h-4 w-4 ml-2 text-yellow-700" />
-                      </Link>
-                    </Button>
-                    <Button size="lg" variant="outline" asChild>
-                      <Link href="/about">Learn More About Us</Link>
-                    </Button>
-                  </div>
-              </div>
+        <div className="container px-4 md:px-6 text-center">
+          <h2 className="tracking-tighter text-3xl md:text-4xl font-bold mb-4">
+            Ready to Find Your Perfect Pet?
+          </h2>
+          <p className="text-xl text-muted-foreground mb-8 max-w-[85%] md:max-w-[65%] mx-auto">
+            Join Thousands of happy families who have found their perfect
+            companions through PawsHome. Start your adoption journey today!
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" asChild>
+              <Link href="/pets">
+                Start Adopting Now!
+                <PawPrint className="h-4 w-4 ml-2 text-yellow-700" />
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <Link href="/about">Learn More About Us</Link>
+            </Button>
+          </div>
+        </div>
       </section>
     </div>
   );
