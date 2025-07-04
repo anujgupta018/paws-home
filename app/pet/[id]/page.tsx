@@ -16,8 +16,11 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default function PetsDetailPage({ params }: { params: { id: string } }) {
-  const pet = pets.find((p) => p.id === params.id);
+export default async function PetsDetailPage(props: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await props.params;
+  const pet = pets.find((p) => p.id === id);
   if (!pet) {
     notFound();
   }
@@ -160,7 +163,6 @@ export default function PetsDetailPage({ params }: { params: { id: string } }) {
             </Tabs>
           </div>
         </div>
-
         <div className="space-y-6">
           <Card>
             <CardHeader>

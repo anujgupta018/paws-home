@@ -23,6 +23,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { pets } from "@/lib/mock-data";
 import { Calendar, MapPin, Ruler } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 
@@ -92,10 +93,10 @@ export default function AdoptPage() {
                 </p>
                 <div className="flex gap-4 justify-center">
                   <Button asChild>
-                    <a href="/pets">Browse More pets</a>
+                    <Link href="/pets">Browse More pets</Link>
                   </Button>
                   <Button variant={"outline"} asChild>
-                    <a href="/">Back to home</a>
+                    <Link href="/">Back to home</Link>
                   </Button>
                 </div>
               </div>

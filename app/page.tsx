@@ -160,8 +160,8 @@ export default function Home() {
               Simple Adoption Process
             </h2>
             <p className="text-xl text-muted-foreground max-w-[85%] md:max-w-[65%]">
-              We've made adoption a pet as easy as possible while ensuring the
-              best match for you and your companion.
+              We&apos;ve made adoption a pet as easy as possible while ensuring
+              the best match for you and your companion.
             </p>
           </div>
 
